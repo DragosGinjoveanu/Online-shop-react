@@ -1,4 +1,5 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import RootLayout from "./pages/Root";
 import ErrorPage from "./pages/Error";
@@ -18,6 +19,9 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  const products = useSelector((store) => store.products.products);
+  console.log(products);
+
   return <RouterProvider router={router} />;
 }
 
