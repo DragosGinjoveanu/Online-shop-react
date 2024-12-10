@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 // each product has
-// id, title, image, description, price, quantity, category
+// title (which is also id), image, description, price, quantity, category
 
 const initialState = {
   products: [],

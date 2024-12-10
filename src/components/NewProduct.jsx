@@ -1,18 +1,26 @@
-import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { productsActions } from "../store/products-slice";
+
+import { productExists } from "../store/helpers/products";
 
 export default function NewProduct() {
   const dispatch = useDispatch();
+  const products = useSelector((store) => store.products.products);
+
+  const [warning, setWarning] = useState(null);
 
   function handleSubmit(event) {
     event.preventDefault();
-
     const fd = new FormData(event.target);
     const productData = Object.fromEntries(fd.entries());
 
-    // !!! should add extra verifications to not have duplicate id / title and display an error in page
+    if (!productExists(products, productData.title)) {
+      dispatch(productsActions.createProduct(productData));
+      return;
+    }
 
-    dispatch(productsActions.createProduct(productData));
+    setWarning("Title is already taken. Please write an unique title!");
   }
 
   return (
@@ -20,26 +28,8 @@ export default function NewProduct() {
       <h2 className="text-2xl font-bold mb-6 text-gray-800">
         Create New Product
       </h2>
+      {warning && <h2 className="text-red-800">{warning}</h2>}
       <form onSubmit={handleSubmit}>
-        {/* ID */}
-        <div className="mb-4">
-          <label
-            htmlFor="id"
-            className="block text-gray-700 text-sm font-bold mb-2"
-          >
-            ID
-          </label>
-          <input
-            required
-            minLength={1}
-            type="text"
-            id="id"
-            name="id"
-            className="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring focus:ring-blue-500"
-            placeholder="Enter product ID"
-          />
-        </div>
-
         {/* Title */}
         <div className="mb-4">
           <label
@@ -49,13 +39,14 @@ export default function NewProduct() {
             Title
           </label>
           <input
+            onChange={() => setWarning(null)}
             required
             minLength={3}
             type="text"
             id="title"
             name="title"
             className="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring focus:ring-blue-500"
-            placeholder="Enter product title"
+            placeholder="Enter product title (will also be product id)"
           />
         </div>
 
