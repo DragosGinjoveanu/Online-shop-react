@@ -1,10 +1,11 @@
-import { useSelector } from "react-redux";
+import ProductsList from "./products/ProductsList";
 
 export default function Home() {
-  const products = useSelector((store) => store.products.products);
-  console.log(products);
+  // should also have a searchBar component, search by name and then filter methods
 
-  // !!! display a basic list of products here
-
-  return <h1>This is the home page</h1>;
+  return (
+    <>
+      <ProductsList />
+    </>
+  );
 }
