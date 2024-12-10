@@ -1,11 +1,13 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { productsActions } from "../store/products-slice";
 
-import { productExists } from "../store/helpers/products";
+import { productsActions } from "../../store/products-slice";
+import { productExists } from "../../store/helpers/products";
 
 export default function NewProduct() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const products = useSelector((store) => store.products.products);
 
   const [warning, setWarning] = useState(null);
@@ -17,6 +19,7 @@ export default function NewProduct() {
 
     if (!productExists(products, productData.title)) {
       dispatch(productsActions.createProduct(productData));
+      navigate("/");
       return;
     }
 
