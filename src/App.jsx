@@ -5,6 +5,7 @@ import ErrorPage from "./pages/Error";
 import Home from "./components/Home";
 import NewProduct from "./components/products/NewProduct";
 import ProductDetails from "./components/Products/ProductDetails";
+import ShoppingCart from "./components/ShoppingCart/ShoppingCart";
 
 const router = createBrowserRouter([
   {
@@ -13,6 +14,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <Home /> },
+      { path: "shopping-cart", element: <ShoppingCart /> },
       { path: "create-new-product", element: <NewProduct /> },
       { path: "product/:title/details", element: <ProductDetails /> },
     ],
