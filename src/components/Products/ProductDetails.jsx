@@ -1,8 +1,9 @@
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { findProductDetails } from "../../store/helpers/products";
 import { cartActions } from "../../store/cart-slice";
+import { isInCart } from "../../store/helpers/cart";
 
 import ErrorPage from "../../pages/Error";
 import Notification from "../Notification";
@@ -15,10 +16,9 @@ export default function ProductDetails() {
   const { title } = useParams();
   const decodedTitle = decodeURIComponent(title);
 
+  const cartItems = useSelector((state) => state.cart.items);
   const products = useSelector((store) => store.products.products);
   const product = findProductDetails(products, decodedTitle);
-
-  const cartItems = useSelector((store) => store.cart.items);
 
   function handleAddToCart() {
     const cartProductData = {
@@ -27,9 +27,12 @@ export default function ProductDetails() {
       price: product.price,
     };
 
-    dispatch(cartActions.addItem(cartProductData));
-
-    setNotification("The item has been added to the cart");
+    if (!isInCart(cartItems, product.title)) {
+      dispatch(cartActions.addItem(cartProductData));
+      setNotification("The item has been added to the cart");
+    } else {
+      setNotification("The item is already in the cart");
+    }
   }
 
   if (product === undefined) {
@@ -90,7 +93,7 @@ export default function ProductDetails() {
           </div>
 
           <footer className="p-6 bg-gray-200 dark:bg-gray-700 flex justify-center">
-            {product.quantity !== "0" && (
+            {product.quantity !== 0 && (
               <button
                 className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded shadow-lg transition duration-300 ease-in-out transform hover:scale-105"
                 onClick={handleAddToCart}
@@ -98,7 +101,7 @@ export default function ProductDetails() {
                 Add to Cart
               </button>
             )}
-            {product.quantity === "0" && (
+            {product.quantity === 0 && (
               <p className="text-red-500 text-lg font-semibold">
                 Sorry, this product is out of stock. Check back soon for
                 availability!

@@ -1,10 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// each item has a id, title, price and counter
+// each item has a id, title, price and quantity
 
 const initialCartState = {
   items: [],
-  showCart: false,
   totalItems: 0,
 };
 
@@ -57,9 +56,6 @@ const cartSlice = createSlice({
         (item) => item.id !== action.payload.id
       );
       state.items = updatedItems;
-    },
-    toggleCart(state) {
-      state.showCart = !state.showCart;
     },
   },
 });

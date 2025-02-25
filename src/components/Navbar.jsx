@@ -1,4 +1,6 @@
 import { NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 
 export default function Navbar() {
   return (
@@ -22,6 +24,14 @@ export default function Navbar() {
           }
         >
           Create new product
+        </NavLink>
+        <NavLink
+          to="/shopping-cart"
+          className={({ isActive }) =>
+            isActive ? "text-blue-500 font-bold" : "hover:text-gray-400"
+          }
+        >
+          <FontAwesomeIcon icon={faCartShopping} />
         </NavLink>
       </div>
     </nav>

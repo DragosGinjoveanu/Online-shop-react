@@ -17,6 +17,9 @@ export default function NewProduct() {
     const fd = new FormData(event.target);
     const productData = Object.fromEntries(fd.entries());
 
+    productData.price = Number(productData.price);
+    productData.quantity = Number(productData.quantity);
+
     if (!productExists(products, productData.title)) {
       dispatch(productsActions.createProduct(productData));
       navigate("/");
