@@ -10,8 +10,6 @@ export default function ShoppingCart() {
   const cartItems = useSelector((state) => state.cart.items);
   const products = useSelector((state) => state.products.products);
 
-  console.log(cartItems);
-
   function handleIncrementItem(id, currentQuantity) {
     const maxAvailableQuantity = findProductDetails(products, id).quantity;
     if (currentQuantity < maxAvailableQuantity) {

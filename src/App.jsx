@@ -7,6 +7,9 @@ import NewProduct from "./components/products/NewProduct";
 import ProductDetails from "./components/Products/ProductDetails";
 import ShoppingCart from "./components/ShoppingCart/ShoppingCart";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -22,7 +25,12 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <ToastContainer />
+      <RouterProvider router={router} />{" "}
+    </>
+  );
 }
 
 export default App;
