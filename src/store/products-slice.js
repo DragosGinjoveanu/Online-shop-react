@@ -29,7 +29,7 @@ const initialProducts = [
     category: "vegetables",
   },
   {
-    title: "potato2",
+    title: "atato2",
     image: "potato.png",
     description: "this is a potato",
     price: 5,
