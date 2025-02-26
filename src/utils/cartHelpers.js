@@ -1,13 +1,10 @@
 import { toast } from "react-toastify";
 import { cartActions } from "../store/cart-slice";
 import { isInCart } from "../store/helpers/cart";
+import { findProductDetails } from "../store/helpers/products";
 
 export function addToCart(dispatch, cartItems, product) {
-  if (!product) {
-    toast.error("Product not found", {
-      position: "top-center",
-      autoClose: 3000,
-    });
+  if (!validateProductExists(product)) {
     return;
   }
 
@@ -34,4 +31,38 @@ export function addToCart(dispatch, cartItems, product) {
       autoClose: 3000,
     });
   }
+}
+
+export function increaseProductQuantity(
+  dispatch,
+  products,
+  id,
+  currentQuantity
+) {
+  const product = findProductDetails(products, id);
+  if (!validateProductExists(product)) {
+    return;
+  }
+
+  const maxAvailableQuantity = product.quantity;
+
+  if (currentQuantity < maxAvailableQuantity) {
+    dispatch(cartActions.incrementItem({ id }));
+  } else {
+    toast.error("The maximum quantity for this product has been reached", {
+      position: "top-center",
+      autoClose: 3000,
+    });
+  }
+}
+
+function validateProductExists(product) {
+  if (!product) {
+    toast.error("Product not found", {
+      position: "top-center",
+      autoClose: 3000,
+    });
+    return null;
+  }
+  return product;
 }

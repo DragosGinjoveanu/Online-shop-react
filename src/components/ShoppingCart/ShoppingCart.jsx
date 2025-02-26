@@ -2,21 +2,13 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { calculateTotal } from "../../store/helpers/cart";
 import { cartActions } from "../../store/cart-slice";
-import { findProductDetails } from "../../store/helpers/products";
+import { increaseProductQuantity } from "../../utils/cartHelpers";
 
 export default function ShoppingCart() {
   const dispatch = useDispatch();
 
   const cartItems = useSelector((state) => state.cart.items);
   const products = useSelector((state) => state.products.products);
-
-  function handleIncrementItem(id, currentQuantity) {
-    const maxAvailableQuantity = findProductDetails(products, id).quantity;
-    if (currentQuantity < maxAvailableQuantity) {
-      dispatch(cartActions.incrementItem({ id }));
-    }
-    // need to notify the user if item is not available
-  }
 
   function handleDecrementItem(id) {
     dispatch(cartActions.decrementItem({ id }));
@@ -54,7 +46,12 @@ export default function ShoppingCart() {
                   <button
                     className="px-2 py-1 bg-gray-200 rounded"
                     onClick={() =>
-                      handleIncrementItem(cartItem.id, cartItem.quantity)
+                      increaseProductQuantity(
+                        dispatch,
+                        products,
+                        cartItem.id,
+                        cartItem.quantity
+                      )
                     }
                   >
                     +
