@@ -14,7 +14,11 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
-    errorElement: <ErrorPage />,
+    errorElement: (
+      <ErrorPage
+        message={" Oops! The page you are looking for does not exist."}
+      />
+    ),
     children: [
       { index: true, element: <Home /> },
       { path: "shopping-cart", element: <ShoppingCart /> },
