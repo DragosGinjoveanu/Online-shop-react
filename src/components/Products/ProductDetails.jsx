@@ -16,7 +16,11 @@ export default function ProductDetails() {
   const product = findProductDetails(products, decodedTitle);
 
   if (product === undefined) {
-    return <ErrorPage />;
+    return (
+      <ErrorPage
+        message={"Oops! The product you are looking for does not exist"}
+      />
+    );
   }
 
   return (
