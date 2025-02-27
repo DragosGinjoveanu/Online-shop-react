@@ -17,7 +17,6 @@ export default function PriceFilter({
 
   function handleMaxPriceChange(e) {
     const introducedMaxPrice = Number(e.target.value);
-    console.log(introducedMaxPrice, minPrice);
     if (introducedMaxPrice < minPrice) {
       setMinPrice(0);
     }

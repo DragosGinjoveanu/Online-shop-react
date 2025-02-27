@@ -12,8 +12,6 @@ import { getMaxProductPrice } from "../store/helpers/products";
 export default function Home() {
   const products = useSelector((store) => store.products.products);
 
-  // function that gets the maximum price
-
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [showInStockOnly, setShowInStockOnly] = useState(false);
@@ -69,7 +67,10 @@ export default function Home() {
 
       <div className="flex-1">
         <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-        <ProductsList products={filteredProducts} />
+        <ProductsList
+          allProducts={products}
+          filteredProducts={filteredProducts}
+        />
       </div>
     </div>
   );
