@@ -3,11 +3,13 @@ import { useSelector } from "react-redux";
 import ProductsList from "./products/ProductsList";
 import SearchBar from "./Search/SearchBar";
 import CategoryFilter from "./Search/CategoryFilter";
+import StockFilter from "./Search/StockFilter";
 
 export default function Home() {
   const products = useSelector((store) => store.products.products);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [showInStockOnly, setShowInStockOnly] = useState(false);
 
   const filteredProducts = products.filter((product) => {
     const matchesSearch = product.title
@@ -17,7 +19,9 @@ export default function Home() {
     const matchesCategory =
       selectedCategory === "" || product.category === selectedCategory;
 
-    return matchesSearch && matchesCategory;
+    const matchesStock = !showInStockOnly || product.quantity > 0;
+
+    return matchesSearch && matchesCategory && matchesStock;
   });
 
   return (
@@ -27,6 +31,10 @@ export default function Home() {
           products={products}
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
+        />
+        <StockFilter
+          showInStockOnly={showInStockOnly}
+          setShowInStockOnly={setShowInStockOnly}
         />
       </div>
 
