@@ -19,7 +19,6 @@ export function AuthProvider({ children }) {
 
   const value = {
     currentUser,
-    isAuthenticated: !!currentUser,
   };
 
   return (
