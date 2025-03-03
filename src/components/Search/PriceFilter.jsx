@@ -1,3 +1,5 @@
+import CustomInput from "../../ui/Input";
+
 export default function PriceFilter({
   maxProductPrice,
   sortOrder,
@@ -58,8 +60,10 @@ export default function PriceFilter({
       <div className="flex flex-col gap-2">
         <label className="flex items-center gap-2">
           Min Price:
-          <input
+          <CustomInput
             type="number"
+            id="min-price"
+            name="min-price"
             value={minPrice}
             onChange={handleMinPriceChange}
             className="border rounded-md p-2 w-20"
@@ -70,8 +74,10 @@ export default function PriceFilter({
 
         <label className="flex items-center gap-2">
           Max Price:
-          <input
+          <CustomInput
             type="number"
+            id="max-price"
+            name="max-price"
             value={maxPrice}
             onChange={handleMaxPriceChange}
             className="border rounded-md p-2 w-20"

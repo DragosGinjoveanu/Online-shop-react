@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { productsActions } from "../../store/products-slice";
 import { productExists } from "../../store/helpers/products";
 
+import CustomInput from "../../ui/Input";
+
 export default function NewProduct() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -36,122 +38,79 @@ export default function NewProduct() {
       </h2>
       {warning && <h2 className="text-red-800">{warning}</h2>}
       <form onSubmit={handleSubmit}>
-        {/* Title */}
         <div className="mb-4">
-          <label
-            htmlFor="title"
-            className="block text-gray-700 text-sm font-bold mb-2"
-          >
-            Title
-          </label>
-          <input
-            onChange={() => setWarning(null)}
-            required
-            minLength={3}
+          <CustomInput
+            label="Title"
             type="text"
             id="title"
             name="title"
-            className="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring focus:ring-blue-500"
+            required
+            minLength={3}
             placeholder="Enter product title (will also be product id)"
+            onChange={() => setWarning(null)}
           />
         </div>
 
-        {/* Image */}
         <div className="mb-4">
-          <label
-            htmlFor="image"
-            className="block text-gray-700 text-sm font-bold mb-2"
-          >
-            Image URL
-          </label>
-          <input
-            minLength={4}
-            required
+          <CustomInput
+            label="Image URL"
             type="text"
             id="image"
             name="image"
-            className="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring focus:ring-blue-500"
+            required
+            minLength={4}
             placeholder="Enter product image file name e.g: apple.png"
           />
         </div>
 
-        {/* Description */}
         <div className="mb-4">
-          <label
-            htmlFor="description"
-            className="block text-gray-700 text-sm font-bold mb-2"
-          >
-            Description
-          </label>
-          <textarea
-            required
-            minLength={10}
+          <CustomInput
+            label="Description"
+            type="textarea"
             id="description"
             name="description"
-            className="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring focus:ring-blue-500"
+            required
+            minLength={10}
             placeholder="Enter product description"
-            rows="4"
-          ></textarea>
+          />
         </div>
 
-        {/* Price */}
         <div className="mb-4">
-          <label
-            htmlFor="price"
-            className="block text-gray-700 text-sm font-bold mb-2"
-          >
-            Price
-          </label>
-          <input
-            required
-            minLength={1}
+          <CustomInput
+            label="Price"
             type="number"
             id="price"
             name="price"
-            className="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring focus:ring-blue-500"
+            required
+            minLength={1}
             placeholder="Enter product price"
           />
         </div>
 
-        {/* Quantity */}
         <div className="mb-4">
-          <label
-            htmlFor="quantity"
-            className="block text-gray-700 text-sm font-bold mb-2"
-          >
-            Quantity
-          </label>
-          <input
-            required
-            minLength={1}
+          <CustomInput
+            label="Quantity"
             type="number"
             id="quantity"
             name="quantity"
-            className="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring focus:ring-blue-500"
+            required
+            minLength={1}
             placeholder="Enter available product quantity"
           />
         </div>
 
-        {/* Category */}
         <div className="mb-4">
-          <label
-            htmlFor="category"
-            className="block text-gray-700 text-sm font-bold mb-2"
-          >
-            Category
-          </label>
-          <input
-            required
-            minLength={2}
+          <CustomInput
+            label="Category"
             type="text"
             id="category"
             name="category"
-            className="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring focus:ring-blue-500"
+            required
+            minLength={2}
             placeholder="Enter product category"
           />
         </div>
 
-        {/* Submit Button */}
         <button
           type="submit"
           className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-500"
