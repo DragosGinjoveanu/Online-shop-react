@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useSelector } from "react-redux";
 
 import ProductsList from "./products/ProductsList";
@@ -6,10 +6,13 @@ import SearchBar from "./Search/SearchBar";
 import CategoryFilter from "./Search/CategoryFilter";
 import StockFilter from "./Search/StockFilter";
 import PriceFilter from "./Search/PriceFilter";
+import AuthContext from "../contexts/authContext";
 
 import { getMaxProductPrice } from "../store/helpers/products";
+import { doSignOut } from "../firebase/auth";
 
 export default function Home() {
+  const { currentUser } = useContext(AuthContext);
   const products = useSelector((store) => store.products.products);
 
   const [searchQuery, setSearchQuery] = useState("");
@@ -44,6 +47,8 @@ export default function Home() {
 
   return (
     <div className="flex gap-6 px-4">
+      {/* This button is for testing purposes for now */}
+      {currentUser && <button onClick={() => doSignOut()}>Sign out</button>}
       <div className="w-64">
         <CategoryFilter
           products={products}
