@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import Navbar from "../components/Navbar";
+
+import CustomButton from "../ui/Button";
 
 export default function ErrorPage({ message }) {
   const navigate = useNavigate();
@@ -14,14 +15,11 @@ export default function ErrorPage({ message }) {
           alt="Lost Unicorn"
           className="w-64 h-64 object-contain mb-6"
         />
-
-        <button
-          onClick={() => navigate("/")}
-          className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105"
-        >
-          Go Home
-        </button>
+        <div className="w-auto">
+          <CustomButton onClick={() => navigate("/")}>Go Home</CustomButton>
+        </div>
       </div>
     </>
   );
 }
+//className="  transition duration-300 ease-in-out transform hover:scale-105"

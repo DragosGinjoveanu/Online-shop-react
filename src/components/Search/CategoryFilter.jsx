@@ -1,3 +1,5 @@
+import CustomButton from "../../ui/Button";
+
 export default function CategoryFilter({
   products,
   selectedCategory,
@@ -13,20 +15,20 @@ export default function CategoryFilter({
       <h3 className="font-semibold mb-3 text-lg">Categories</h3>
       <div className="flex flex-col gap-2">
         {categories.map((category) => (
-          <button
+          <CustomButton
             key={category}
             onClick={() =>
               setSelectedCategory(category === "All" ? "" : category)
             }
-            className={`px-4 py-2 rounded-md text-left transition ${
+            color={
               selectedCategory === category ||
               (category === "All" && selectedCategory === "")
                 ? "bg-blue-500 text-white"
-                : "bg-gray-200"
-            }`}
+                : "bg-gray-500"
+            }
           >
             {category}
-          </button>
+          </CustomButton>
         ))}
       </div>
     </div>

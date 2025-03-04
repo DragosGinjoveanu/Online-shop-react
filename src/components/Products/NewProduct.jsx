@@ -6,6 +6,7 @@ import { productsActions } from "../../store/products-slice";
 import { productExists } from "../../store/helpers/products";
 
 import CustomInput from "../../ui/Input";
+import CustomButton from "../../ui/Button";
 
 export default function NewProduct() {
   const dispatch = useDispatch();
@@ -111,12 +112,7 @@ export default function NewProduct() {
           />
         </div>
 
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-500"
-        >
-          Submit
-        </button>
+        <CustomButton>Submit</CustomButton>
       </form>
     </div>
   );

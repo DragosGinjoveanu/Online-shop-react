@@ -9,6 +9,7 @@ import {
 } from "../../firebase/auth";
 import AuthContext from "../../contexts/authContext/index";
 import CustomInput from "../../ui/Input";
+import CustomButton from "../../ui/Button";
 
 export default function Login() {
   const { currentUser } = useContext(AuthContext);
@@ -81,16 +82,15 @@ export default function Login() {
             />
           </div>
 
-          <button className="w-full bg-blue-600 text-white p-2 rounded mb-4">
-            Login
-          </button>
+          <CustomButton position="mb-4">Login</CustomButton>
         </form>
-        <button
+        <CustomButton
+          color="bg-red-500"
+          hoverColor="bg-red-300"
           onClick={handleGoogleLogin}
-          className="w-full bg-red-500 text-white p-2 rounded"
         >
           Sign in with Google
-        </button>
+        </CustomButton>
         <p className="mt-4 text-sm text-center">
           Don't have an account?{" "}
           <a href="/register" className="text-blue-600">

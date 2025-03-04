@@ -4,6 +4,8 @@ import { calculateTotal } from "../../store/helpers/cart";
 import { cartActions } from "../../store/cart-slice";
 import { increaseProductQuantity } from "../../utils/cartHelpers";
 
+import CustomButton from "../../ui/Button";
+
 export default function ShoppingCart() {
   const dispatch = useDispatch();
 
@@ -43,8 +45,8 @@ export default function ShoppingCart() {
                   </p>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <button
-                    className="px-2 py-1 bg-gray-200 rounded"
+                  <CustomButton
+                    color="bg-gray-500"
                     onClick={() =>
                       increaseProductQuantity(
                         dispatch,
@@ -55,13 +57,13 @@ export default function ShoppingCart() {
                     }
                   >
                     +
-                  </button>
-                  <button
-                    className="px-2 py-1 bg-gray-200 rounded"
+                  </CustomButton>
+                  <CustomButton
+                    color="bg-gray-500"
                     onClick={() => handleDecrementItem(cartItem.id)}
                   >
                     -
-                  </button>
+                  </CustomButton>
                 </div>
               </li>
             ))}
@@ -69,12 +71,7 @@ export default function ShoppingCart() {
           <p className="text-lg font-semibold border-t pt-2 mt-4">
             Total: ${totalPrice.toFixed(2)}
           </p>
-          <button
-            className="w-full bg-blue-600 text-white py-2 rounded mt-4 hover:bg-blue-700"
-            onClick={handleCheckout}
-          >
-            Go to Checkout
-          </button>
+          <CustomButton onClick={handleCheckout}>Go to Checkout</CustomButton>
         </>
       )}
     </div>

@@ -8,6 +8,7 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import AuthContext from "../../contexts/authContext/index";
 import { doCreateUserWithEmailAndPassword } from "../../firebase/auth";
 import CustomInput from "../../ui/Input";
+import CustomButton from "../../ui/Button";
 
 export default function Register() {
   const { currentUser } = useContext(AuthContext);
@@ -76,12 +77,12 @@ export default function Register() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               trailingElement={
-                <button
-                  type="button"
+                <CustomButton
+                  className=""
                   onClick={() => setSeePassword((prev) => !prev)}
                 >
                   <FontAwesomeIcon icon={seePassword ? faEyeSlash : faEye} />
-                </button>
+                </CustomButton>
               }
             />
           </div>
@@ -98,19 +99,17 @@ export default function Register() {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               trailingElement={
-                <button
-                  type="button"
+                <CustomButton
+                  className=""
                   onClick={() => setSeePassword((prev) => !prev)}
                 >
                   <FontAwesomeIcon icon={seePassword ? faEyeSlash : faEye} />
-                </button>
+                </CustomButton>
               }
             />
           </div>
 
-          <button className="w-full bg-blue-600 text-white p-2 rounded mb-4">
-            Register
-          </button>
+          <CustomButton position="mb-4">Register</CustomButton>
         </form>
         <p className="mt-4 text-sm text-center">
           Already have an account?{" "}

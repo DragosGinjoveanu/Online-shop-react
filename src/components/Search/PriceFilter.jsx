@@ -1,4 +1,5 @@
 import CustomInput from "../../ui/Input";
+import CustomButton from "../../ui/Button";
 
 export default function PriceFilter({
   maxProductPrice,
@@ -30,31 +31,27 @@ export default function PriceFilter({
       <h3 className="font-semibold mb-2 text-lg">Price Filter</h3>
 
       <div className="flex flex-col gap-2 mb-4">
-        <button
+        <CustomButton
           onClick={() => setSortOrder("asc")}
-          className={`px-4 py-2 rounded-md transition ${
-            sortOrder === "asc" ? "bg-blue-500 text-white" : "bg-gray-200"
-          }`}
+          color={sortOrder === "asc" ? "bg-blue-500 text-white" : "bg-gray-500"}
         >
           Sort: Low to High
-        </button>
+        </CustomButton>
 
-        <button
+        <CustomButton
           onClick={() => setSortOrder("desc")}
-          className={`px-4 py-2 rounded-md transition ${
-            sortOrder === "desc" ? "bg-blue-500 text-white" : "bg-gray-200"
-          }`}
+          color={
+            sortOrder === "desc" ? "bg-blue-500 text-white" : "bg-gray-500"
+          }
         >
           Sort: High to Low
-        </button>
-        <button
+        </CustomButton>
+        <CustomButton
           onClick={() => setSortOrder("")}
-          className={`px-4 py-2 rounded-md transition ${
-            sortOrder === "" ? "bg-blue-500 text-white" : "bg-gray-200"
-          }`}
+          color={sortOrder === "" ? "bg-blue-500 text-white" : "bg-gray-500"}
         >
           Default Order
-        </button>
+        </CustomButton>
       </div>
 
       <div className="flex flex-col gap-2">
