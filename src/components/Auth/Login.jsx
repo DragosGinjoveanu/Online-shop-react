@@ -2,6 +2,8 @@ import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { toast } from "react-toastify";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 import {
   doSignInWithEmailAndPassword,
@@ -23,6 +25,7 @@ export default function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [seePassword, setSeePassword] = useState(false);
 
   // to-do -> custom notification messages depending if email / password is correct or not
   const handleLogin = async (e) => {
@@ -72,13 +75,21 @@ export default function Login() {
           <div className="mb-4">
             <CustomInput
               label="Password"
-              type="password"
+              type={seePassword ? "text" : "password"}
               id="password"
               name="password"
               required
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              trailingElement={
+                <CustomButton
+                  className=""
+                  onClick={() => setSeePassword((prev) => !prev)}
+                >
+                  <FontAwesomeIcon icon={seePassword ? faEyeSlash : faEye} />
+                </CustomButton>
+              }
             />
           </div>
 

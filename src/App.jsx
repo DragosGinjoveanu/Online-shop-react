@@ -18,8 +18,6 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage message="Oops! Page not found." />,
     children: [
       { index: true, element: <Home /> },
-      { path: "login", element: <Login /> },
-      { path: "register", element: <Register /> },
       {
         path: "shopping-cart",
         element: <ShoppingCart />,
@@ -31,6 +29,8 @@ const router = createBrowserRouter([
       { path: "product/:title/details", element: <ProductDetails /> },
     ],
   },
+  { path: "login", element: <Login /> },
+  { path: "register", element: <Register /> },
 ]);
 
 function App() {
