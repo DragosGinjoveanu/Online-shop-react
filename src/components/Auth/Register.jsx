@@ -20,6 +20,7 @@ export default function Register() {
     }
   }, []);
 
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -37,7 +38,7 @@ export default function Register() {
     }
 
     try {
-      await doCreateUserWithEmailAndPassword(email, password);
+      await doCreateUserWithEmailAndPassword(email, password, username);
       navigate("/");
     } catch (err) {
       toast.error(err.message, {
@@ -52,6 +53,20 @@ export default function Register() {
       <div className="bg-white p-8 rounded-lg shadow-lg w-96">
         <h2 className="text-2xl font-bold mb-6 text-center">Register</h2>
         <form onSubmit={handleRegister}>
+          <div className="mb-4">
+            <CustomInput
+              label="Username"
+              type="text"
+              id="username"
+              name="username"
+              required
+              placeholder="Enter your username"
+              value={username}
+              minLength={3}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
+
           <div className="mb-4">
             <CustomInput
               label="Email"

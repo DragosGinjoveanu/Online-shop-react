@@ -2,6 +2,8 @@ import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 
+import UserMenu from "./Auth/UserMenu";
+
 export default function Navbar() {
   return (
     <nav className="bg-gray-800 text-white p-4">
@@ -25,6 +27,7 @@ export default function Navbar() {
         >
           Create new product
         </NavLink>
+        <UserMenu />
         <NavLink
           to="/shopping-cart"
           className={({ isActive }) =>
