@@ -92,8 +92,13 @@ export default function Login() {
               }
             />
           </div>
-
-          <CustomButton position="mb-4">Login</CustomButton>
+          <p className="text-sm text-center">
+            Forgot your password?{" "}
+            <a href="/reset-password" className="text-blue-600">
+              Reset it here
+            </a>
+          </p>
+          <CustomButton position="mt-4 mb-4">Login</CustomButton>
         </form>
         <CustomButton
           color="bg-red-500"

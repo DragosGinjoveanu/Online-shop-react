@@ -2,7 +2,8 @@ import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import { doPasswordReset, doUpdateUsername } from "../../firebase/auth";
+import { doUpdateUsername } from "../../firebase/auth";
+import ResetPassword from "./ResetPassword";
 import AuthContext from "../../contexts/authContext";
 import CustomInput from "../../ui/Input";
 import CustomButton from "../../ui/Button";
@@ -41,21 +42,6 @@ export default function UserProfile() {
     }
   };
 
-  const handlePasswordReset = async () => {
-    try {
-      await doPasswordReset(currentUser.email);
-      toast.success("Password reset email sent!", {
-        position: "top-center",
-        autoClose: 3000,
-      });
-    } catch (error) {
-      toast.error(error.message, {
-        position: "top-center",
-        autoClose: 3000,
-      });
-    }
-  };
-
   return (
     <div className="max-w-lg mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
       <h2 className="text-2xl font-bold mb-4">User Profile</h2>
@@ -82,13 +68,7 @@ export default function UserProfile() {
       </div>
 
       <div className="mt-6">
-        <CustomButton
-          onClick={handlePasswordReset}
-          color="bg-red-500"
-          hoverColor="bg-red-700"
-        >
-          Reset Password
-        </CustomButton>
+        <ResetPassword />
       </div>
     </div>
   );
