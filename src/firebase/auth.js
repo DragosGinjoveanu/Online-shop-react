@@ -6,6 +6,7 @@ import {
   signInWithPopup,
   signOut,
   updateProfile,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 
 export async function doCreateUserWithEmailAndPassword(
@@ -62,11 +63,23 @@ export async function doSignOut() {
   }
 }
 
-/*
-export function doPasswordReset(email) {
-  return sendPasswordResetEmail(auth, email);
+export async function doPasswordReset(email) {
+  try {
+    await sendPasswordResetEmail(auth, email);
+  } catch (error) {
+    throw new Error(error.message);
+  }
 }
 
+export async function doUpdateUsername(newName) {
+  try {
+    await updateProfile(auth.currentUser, { displayName: newName });
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
+/*
 export function doPasswordChange(password) {
   return updatePassword(auth.currentUser, password);
 }

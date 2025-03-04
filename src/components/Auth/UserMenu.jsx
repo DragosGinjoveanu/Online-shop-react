@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { toast } from "react-toastify";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import { doSignOut } from "../../firebase/auth";
@@ -13,13 +14,33 @@ export default function UserMenu() {
   const { currentUser } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
 
+  function handleDefaultAction() {
+    if (!currentUser) {
+      navigate("/login");
+      return;
+    }
+    navigate("/user");
+  }
+
+  async function handleLogout() {
+    try {
+      await doSignOut();
+      navigate("/");
+    } catch (err) {
+      toast.error(err.message, {
+        position: "top-center",
+        autoClose: 3000,
+      });
+    }
+  }
+
   return (
     <div
       className="relative inline-block text-left"
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
-      <CustomButton onClick={() => navigate("/login")}>
+      <CustomButton onClick={handleDefaultAction}>
         <FontAwesomeIcon icon={faCircleUser} />
         {"  "}
         {currentUser ? currentUser.displayName : "Account"}
@@ -30,9 +51,11 @@ export default function UserMenu() {
           <div className="py-4 px-4">
             {currentUser ? (
               <>
-                <CustomButton position="mb-4">Profile</CustomButton>
+                <CustomButton onClick={() => navigate("/user")} position="mb-4">
+                  Profile
+                </CustomButton>
                 <CustomButton
-                  onClick={() => doSignOut()}
+                  onClick={handleLogout}
                   color="bg-red-500"
                   hoverColor="bg-red-700"
                 >
