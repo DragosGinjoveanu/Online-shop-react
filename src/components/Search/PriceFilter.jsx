@@ -1,3 +1,6 @@
+import CustomInput from "../../ui/Input";
+import CustomButton from "../../ui/Button";
+
 export default function PriceFilter({
   maxProductPrice,
   sortOrder,
@@ -28,38 +31,36 @@ export default function PriceFilter({
       <h3 className="font-semibold mb-2 text-lg">Price Filter</h3>
 
       <div className="flex flex-col gap-2 mb-4">
-        <button
+        <CustomButton
           onClick={() => setSortOrder("asc")}
-          className={`px-4 py-2 rounded-md transition ${
-            sortOrder === "asc" ? "bg-blue-500 text-white" : "bg-gray-200"
-          }`}
+          color={sortOrder === "asc" ? "bg-blue-500 text-white" : "bg-gray-500"}
         >
           Sort: Low to High
-        </button>
+        </CustomButton>
 
-        <button
+        <CustomButton
           onClick={() => setSortOrder("desc")}
-          className={`px-4 py-2 rounded-md transition ${
-            sortOrder === "desc" ? "bg-blue-500 text-white" : "bg-gray-200"
-          }`}
+          color={
+            sortOrder === "desc" ? "bg-blue-500 text-white" : "bg-gray-500"
+          }
         >
           Sort: High to Low
-        </button>
-        <button
+        </CustomButton>
+        <CustomButton
           onClick={() => setSortOrder("")}
-          className={`px-4 py-2 rounded-md transition ${
-            sortOrder === "" ? "bg-blue-500 text-white" : "bg-gray-200"
-          }`}
+          color={sortOrder === "" ? "bg-blue-500 text-white" : "bg-gray-500"}
         >
           Default Order
-        </button>
+        </CustomButton>
       </div>
 
       <div className="flex flex-col gap-2">
         <label className="flex items-center gap-2">
           Min Price:
-          <input
+          <CustomInput
             type="number"
+            id="min-price"
+            name="min-price"
             value={minPrice}
             onChange={handleMinPriceChange}
             className="border rounded-md p-2 w-20"
@@ -70,8 +71,10 @@ export default function PriceFilter({
 
         <label className="flex items-center gap-2">
           Max Price:
-          <input
+          <CustomInput
             type="number"
+            id="max-price"
+            name="max-price"
             value={maxPrice}
             onChange={handleMaxPriceChange}
             className="border rounded-md p-2 w-20"

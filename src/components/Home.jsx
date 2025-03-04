@@ -7,6 +7,7 @@ import CategoryFilter from "./Search/CategoryFilter";
 import StockFilter from "./Search/StockFilter";
 import PriceFilter from "./Search/PriceFilter";
 import AuthContext from "../contexts/authContext";
+import CustomButton from "../ui/Button";
 
 import { getMaxProductPrice } from "../store/helpers/products";
 import { doSignOut } from "../firebase/auth";
@@ -48,7 +49,11 @@ export default function Home() {
   return (
     <div className="flex gap-6 px-4">
       {/* This button is for testing purposes for now */}
-      {currentUser && <button onClick={() => doSignOut()}>Sign out</button>}
+      {currentUser && (
+        <div className="w-auto">
+          <CustomButton onClick={() => doSignOut()}>Sign out</CustomButton>
+        </div>
+      )}
       <div className="w-64">
         <CategoryFilter
           products={products}

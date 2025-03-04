@@ -4,6 +4,7 @@ import { findProductDetails } from "../../store/helpers/products";
 import { addToCart } from "../../utils/cartHelpers";
 
 import ErrorPage from "../../pages/Error";
+import CustomButton from "../../ui/Button";
 
 export default function ProductDetails() {
   const dispatch = useDispatch();
@@ -76,12 +77,11 @@ export default function ProductDetails() {
 
         <footer className="p-6 bg-gray-200 dark:bg-gray-700 flex justify-center">
           {product.quantity !== 0 && (
-            <button
-              className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded shadow-lg transition duration-300 ease-in-out transform hover:scale-105"
+            <CustomButton
               onClick={() => addToCart(dispatch, cartItems, product)}
             >
               Add to Cart
-            </button>
+            </CustomButton>
           )}
           {product.quantity === 0 && (
             <p className="text-red-500 text-lg font-semibold">

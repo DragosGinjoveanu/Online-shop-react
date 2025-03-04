@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../utils/cartHelpers";
 
+import CustomButton from "../../ui/Button";
+
 export default function Product({ product }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -36,25 +38,25 @@ export default function Product({ product }) {
           </span>
         </div>
         <div className="flex items-center justify-between mt-4">
-          <button
+          <CustomButton
             onClick={() =>
               navigate(`/product/${encodeURIComponent(product.title)}/details`)
             }
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
           >
             Product details
-          </button>
-          <button
+          </CustomButton>
+          <CustomButton
             onClick={() => addToCart(dispatch, cartItems, product)}
             className={`text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center focus:ring-4 focus:outline-none ${
               isInStock
-                ? "bg-green-700 hover:bg-green-800 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                ? "bg-green-700 hover:bg-green-800 focus:ring-green-300"
                 : "bg-gray-500 cursor-not-allowed"
             }`}
             disabled={!isInStock}
           >
             Add to cart
-          </button>
+          </CustomButton>
         </div>
       </div>
     </div>

@@ -7,6 +7,8 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 import AuthContext from "../../contexts/authContext/index";
 import { doCreateUserWithEmailAndPassword } from "../../firebase/auth";
+import CustomInput from "../../ui/Input";
+import CustomButton from "../../ui/Button";
 
 export default function Register() {
   const { currentUser } = useContext(AuthContext);
@@ -50,80 +52,64 @@ export default function Register() {
       <div className="bg-white p-8 rounded-lg shadow-lg w-96">
         <h2 className="text-2xl font-bold mb-6 text-center">Register</h2>
         <form onSubmit={handleRegister}>
-          <label
-            htmlFor="email"
-            className="block text-gray-700 text-sm font-bold mb-2"
-          >
-            Email
-          </label>
-          <input
-            required
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Enter your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded mb-4"
-          />
-
-          <label
-            htmlFor="password"
-            className="block text-gray-700 text-sm font-bold mb-2"
-          >
-            Password
-          </label>
-          <div className="relative">
-            <input
+          <div className="mb-4">
+            <CustomInput
+              label="Email"
+              type="email"
+              id="email"
+              name="email"
               required
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+
+          <div className="mb-4">
+            <CustomInput
+              label="Password"
               type={seePassword ? "text" : "password"}
               id="password"
               name="password"
+              required
+              minLength={6}
               placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-2 border border-gray-300 rounded mb-4 pr-10"
-              minLength={6}
+              trailingElement={
+                <CustomButton
+                  className=""
+                  onClick={() => setSeePassword((prev) => !prev)}
+                >
+                  <FontAwesomeIcon icon={seePassword ? faEyeSlash : faEye} />
+                </CustomButton>
+              }
             />
-            <button
-              type="button"
-              onClick={() => setSeePassword((prev) => !prev)}
-              className="absolute right-3 top-3 text-gray-600"
-            >
-              <FontAwesomeIcon icon={seePassword ? faEyeSlash : faEye} />
-            </button>
           </div>
 
-          <label
-            htmlFor="confirm-password"
-            className="block text-gray-700 text-sm font-bold mb-2"
-          >
-            Confirm password
-          </label>
-          <div className="relative">
-            <input
-              required
+          <div className="mb-4">
+            <CustomInput
+              label="Confirm password"
               type={seePassword ? "text" : "password"}
               id="confirm-password"
               name="confirm-password"
+              required
+              minLength={6}
               placeholder="Enter your password again"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="w-full p-2 border border-gray-300 rounded mb-4 pr-10"
-              minLength={6}
+              trailingElement={
+                <CustomButton
+                  className=""
+                  onClick={() => setSeePassword((prev) => !prev)}
+                >
+                  <FontAwesomeIcon icon={seePassword ? faEyeSlash : faEye} />
+                </CustomButton>
+              }
             />
-            <button
-              type="button"
-              onClick={() => setSeePassword((prev) => !prev)}
-              className="absolute right-3 top-3 text-gray-600"
-            >
-              <FontAwesomeIcon icon={seePassword ? faEyeSlash : faEye} />
-            </button>
           </div>
 
-          <button className="w-full bg-blue-600 text-white p-2 rounded mb-4">
-            Register
-          </button>
+          <CustomButton position="mb-4">Register</CustomButton>
         </form>
         <p className="mt-4 text-sm text-center">
           Already have an account?{" "}
