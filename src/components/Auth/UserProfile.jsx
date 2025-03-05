@@ -14,8 +14,6 @@ export default function UserProfile() {
   const { currentUser } = useContext(AuthContext);
   const [newUsername, setNewUsername] = useState("");
 
-  console.log(currentUser.emailVerified);
-
   useEffect(() => {
     if (!currentUser) {
       navigate("/");

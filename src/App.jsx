@@ -10,6 +10,8 @@ import Register from "./components/auth/Register";
 import UserProfile from "./components/Auth/UserProfile";
 import ResetPassword from "./components/Auth/ResetPassword";
 
+import AdminRoute from "./routes/AdminRoute";
+
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -26,7 +28,11 @@ const router = createBrowserRouter([
       },
       {
         path: "create-new-product",
-        element: <NewProduct />,
+        element: (
+          <AdminRoute>
+            <NewProduct />
+          </AdminRoute>
+        ),
       },
       { path: "user", element: <UserProfile /> },
       { path: "product/:title/details", element: <ProductDetails /> },
