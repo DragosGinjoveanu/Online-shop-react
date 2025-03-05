@@ -13,8 +13,6 @@ export default function ResetPassword() {
 
   const [email, setEmail] = useState("");
 
-  console.log(email);
-
   useEffect(() => {
     if (currentUser) {
       setEmail(currentUser.email);

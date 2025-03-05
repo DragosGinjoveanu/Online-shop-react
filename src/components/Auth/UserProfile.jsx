@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 
 import { doUpdateUsername } from "../../firebase/auth";
 import ResetPassword from "./ResetPassword";
+import VerifyEmail from "./VerifyEmail";
 import AuthContext from "../../contexts/authContext";
 import CustomInput from "../../ui/Input";
 import CustomButton from "../../ui/Button";
@@ -12,6 +13,8 @@ export default function UserProfile() {
   const navigate = useNavigate();
   const { currentUser } = useContext(AuthContext);
   const [newUsername, setNewUsername] = useState("");
+
+  console.log(currentUser.emailVerified);
 
   useEffect(() => {
     if (!currentUser) {
@@ -44,7 +47,8 @@ export default function UserProfile() {
 
   return (
     <div className="max-w-lg mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
-      <h2 className="text-2xl font-bold mb-4">User Profile</h2>
+      <h2 className="text-2xl font-bold">User Profile</h2>
+      <VerifyEmail />
       <p>
         <strong>Email:</strong> {currentUser?.email}
       </p>

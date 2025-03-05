@@ -7,6 +7,7 @@ import {
   signOut,
   updateProfile,
   sendPasswordResetEmail,
+  sendEmailVerification,
 } from "firebase/auth";
 
 export async function doCreateUserWithEmailAndPassword(
@@ -74,19 +75,19 @@ export async function doPasswordReset(email) {
 export async function doUpdateUsername(newName) {
   try {
     await updateProfile(auth.currentUser, { displayName: newName });
+    auth.currentUser.reload();
   } catch (error) {
     throw new Error(error.message);
   }
 }
 
-/*
-export function doPasswordChange(password) {
-  return updatePassword(auth.currentUser, password);
+export async function doSendEmailVerification() {
+  try {
+    await sendEmailVerification(auth.currentUser, {
+      url: `${window.location.origin}`,
+    });
+    auth.currentUser.reload();
+  } catch (error) {
+    throw new Error(error.message);
+  }
 }
-
-export function doSendEmailVerification() {
-  return sendEmailVerification(auth.currentUser, {
-    url: `${window.location.origin}`,
-  });
-}
-  */
