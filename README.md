@@ -1,4 +1,4 @@
-# Online Shop React Project - work in progress
+# Online Shop React Project
 
 Welcome to the Online Shop React project! This is an e-commerce application designed to provide a seamless shopping experience.
 
